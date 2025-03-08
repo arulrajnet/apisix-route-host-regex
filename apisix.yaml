@@ -1,0 +1,29 @@
+routes:
+  -
+    hosts: ["*-device.local.arulraj.net"]
+    uri: /*
+    service_id: 1
+  -
+    hosts: ["*.local.arulraj.net"]
+    uri: /*
+    service_id: 2
+  -
+    host: local.arulraj.net
+    uri: /*
+    service_id: 2
+
+services:
+  -
+    id: 1
+    upstream:
+      nodes:
+        "device:80": 1
+      type: roundrobin
+  -
+    id: 2
+    upstream:
+      nodes:
+        "home:80": 1
+      type: roundrobin
+
+#END
